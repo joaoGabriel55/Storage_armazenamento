@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        android:id="@+id/btn2"
+        android:onClick="goToInternStorage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@android:color/holo_blue_light"
+        android:text="salvar foto no armazanamento interno"
+        android:layout_marginTop="114dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btn3"
+        android:onClick="goToBD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.02"
+        android:backgroundTint="@android:color/holo_orange_light"
+        android:text="salvar foto em um banco de dados"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/btn1"
+        android:layout_alignLeft="@+id/btn1"
+        android:layout_alignStart="@+id/btn1"
+        android:layout_alignRight="@+id/btn1"
+        android:layout_alignEnd="@+id/btn1" />
+
+    <Button
+        android:id="@+id/btn1"
+        android:onClick="goToSDCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="0.02"
+        android:backgroundTint="@android:color/holo_red_dark"
+        android:text="salvar foto no sdcard"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btn2"
+        android:layout_alignLeft="@+id/btn2"
+        android:layout_alignStart="@+id/btn2"
+        android:layout_alignRight="@+id/btn2"
+        android:layout_alignEnd="@+id/btn2" />
+</RelativeLayout>
