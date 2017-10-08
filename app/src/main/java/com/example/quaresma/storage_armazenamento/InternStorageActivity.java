@@ -5,9 +5,17 @@ import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.StrictMode;
+import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -17,57 +25,113 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class InternStorageActivity extends AppCompatActivity {
 
     String FILENAME = "photo_master";
+    String picturePath = "";
     ImageView imageView;
     Bitmap img;
     EditText editText;
+    Context context;
+    static Uri capturedImageUri = null;
+    private String pictureImagePath = "";
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intern_storage);
 
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
+        builder.detectFileUriExposure();
+
         imageView = (ImageView) findViewById(R.id.imageViewIntern);
 /*        editText = (EditText) findViewById(R.id.editText);
-
         readFile();*/
+        Button button = (Button) findViewById(R.id.takePhotoInter);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String imageFileName = timeStamp + ".jpg";
+                File storageDir = Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES);
+                pictureImagePath = storageDir.getAbsolutePath() + "/" + imageFileName;
+                File file = new File(pictureImagePath);
+                Uri outputFileUri = Uri.fromFile(file);
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
+                //Por motivos obvios
+                //Esse zero é nosso result code para saber se vai dar bom ou não
+                //Intent contem a msg
+                Log.i("TO usando agr", "EAE MLK");
+                startActivityForResult(cameraIntent, 1);
+                Log.i("TO usando agr", "EAE MLK");
+            }
+
+            protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+                if (requestCode == 1) {
+                    File imgFile = new File(pictureImagePath);
+                    if (imgFile.exists()) {
+                        img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                        imageView.setImageBitmap(img);
+
+                    }
+                }
+
+                Log.i("TO usando agr", "Sera que deu bom ????");
+            }
+        });
 
     }
 
 
+    public void takePhotoIntern(View v) {
+        ContextWrapper contextWrapper = new ContextWrapper(this);
 
-    public void takePhotoIntern(View v){
-        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        String timestamp = new SimpleDateFormat("ddMMyyyy").format(new Date());
+        String imageFileName = timestamp + ".jpg";
+        File storagediretorio = contextWrapper.getDir("photo", Context.MODE_PRIVATE);
+
+        picturePath = storagediretorio.getAbsolutePath() + "/" + imageFileName;
+
+        File file = new File(picturePath);
+        Uri outputFileUri = Uri.fromFile(file);
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+
         //Por motivos obvios
         //Esse zero é nosso result code para saber se vai dar bom ou não
         //Intent contem a msg
-        startActivityForResult(intent, 0);
+        startActivityForResult(cameraIntent, 1);
+        Log.i("TO usando agr", "EAE MLK");
     }
 
-    @Override
+    /*@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (data != null){
-            Bundle bundle = data.getExtras();
-            if(bundle != null){
-                //Esse "data" é nossa chave ou seja podia ser bananinha
-                img = (Bitmap) bundle.get("data");
-
-                imageView = (ImageView) findViewById(R.id.imageViewIntern);
+        if (requestCode == 1){
+            File imgFile = new File(picturePath);
+            if (imgFile.exists()){
+                img = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 imageView.setImageBitmap(img);
-
             }
         }
 
-    }
+        Log.i("TO usando agr","Sera que deu bom ????");
+    }*/
 
     public void readFile() {
         // Read File and Content
-        FileInputStream fin ;
+        FileInputStream fin;
         try {
             //abre o arquivo chamado FILENAME para LEITURA
             fin = openFileInput(FILENAME);
@@ -90,8 +154,7 @@ public class InternStorageActivity extends AppCompatActivity {
     }
 
 
-
-    public String salvarInterno(View v){
+    public String salvarInterno(View v) {
         ContextWrapper contextWrapper = new ContextWrapper(this);
 
         File dir = contextWrapper.getDir("photo", Context.MODE_PRIVATE);
@@ -131,38 +194,5 @@ public class InternStorageActivity extends AppCompatActivity {
 
     }
 
-    public void readFileClick(View v) {
-        // Read File and Content
-        try {
-            String path = null;
-            File f = new File(path, "image.jpg");
-            Bitmap img2 = BitmapFactory.decodeStream(new FileInputStream(f));
-            imageView.setImageBitmap(img2);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-       /* FileInputStream fin ;
-        try {
-            //abre o arquivo chamado FILENAME para LEITURA
-            fin = openFileInput(FILENAME);
-            int size;
-            String newText = "";
-
-            // le enquanto é possível
-            while ((size = fin.read()) != -1) {
-                Log.i( "Leu", ""+(char)size);
-                // add & append content
-                newText += Character.toString((char) size);
-            }
-
-            Toast.makeText(this, newText, Toast.LENGTH_SHORT).show();
-            fin.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
 }

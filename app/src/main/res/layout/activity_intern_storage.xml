@@ -25,7 +25,6 @@
 
     <Button
         android:id="@+id/takePhotoInter"
-        android:onClick="takePhotoIntern"
         android:layout_width="176dp"
         android:layout_height="48dp"
         android:text="Tirar Foto"
