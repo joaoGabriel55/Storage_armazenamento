@@ -3,48 +3,69 @@
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <View
+        android:id="@+id/Divisor1"
+        android:layout_width="wrap_content"
+        android:layout_height="2dip"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginTop="75dp"
+        android:background="#A8A8A8" />
+
     <Button
         android:id="@+id/btn2"
-        android:onClick="goToInternStorage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@android:color/holo_blue_light"
-        android:text="salvar foto no armazanamento interno"
-        android:layout_marginTop="114dp"
-        android:layout_alignParentTop="true"
+        android:onClick="goToInternStorage"
+        android:text="Armazanamento interno"
+        android:layout_above="@+id/btn1"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btn3"
-        android:onClick="goToBD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_gravity="center"
         android:layout_weight="0.02"
         android:backgroundTint="@android:color/holo_orange_light"
-        android:text="salvar foto em um banco de dados"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/btn1"
-        android:layout_alignLeft="@+id/btn1"
-        android:layout_alignStart="@+id/btn1"
+        android:onClick="goToBD"
+        android:text="banco de dados"
         android:layout_alignRight="@+id/btn1"
-        android:layout_alignEnd="@+id/btn1" />
+        android:layout_alignEnd="@+id/btn1"
+        android:layout_alignLeft="@+id/btn1"
+        android:layout_alignStart="@+id/btn1" />
 
     <Button
         android:id="@+id/btn1"
-        android:onClick="goToSDCard"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btn3"
+        android:layout_alignLeft="@+id/btn2"
+        android:layout_alignStart="@+id/btn2"
         android:layout_gravity="center"
         android:layout_weight="0.02"
         android:backgroundTint="@android:color/holo_red_dark"
-        android:text="salvar foto no sdcard"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="10dp"
-        android:layout_below="@+id/btn2"
-        android:layout_alignLeft="@+id/btn2"
-        android:layout_alignStart="@+id/btn2"
-        android:layout_alignRight="@+id/btn2"
-        android:layout_alignEnd="@+id/btn2" />
+        android:onClick="goToSDCard"
+        android:text="Armazenamento externo"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Escolha a forma de armazenamento"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="47dp" />
+
+
 </RelativeLayout>

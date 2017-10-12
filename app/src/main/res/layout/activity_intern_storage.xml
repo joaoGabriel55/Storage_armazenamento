@@ -25,79 +25,66 @@
 
     <Button
         android:id="@+id/takePhotoInter"
-        android:layout_width="176dp"
+        android:onClick="takePhotoIntern"
+        android:layout_width="115dp"
         android:layout_height="48dp"
         android:text="Tirar Foto"
-        app:layout_constraintRight_toLeftOf="@+id/buttonSaveInter"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintBaseline_toBaselineOf="@+id/readIntern"
-        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSaveInter"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/buttonSaveInter" />
 
     <Button
         android:id="@+id/buttonSaveInter"
-        android:layout_width="177dp"
-        android:layout_height="48dp"
-        android:backgroundTint="@android:color/holo_green_light"
-        android:onClick="salvarInterno"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@android:color/holo_blue_dark"
+        android:onClick="saveImgClick"
         android:text="Salvar"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/takePhotoInter"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageViewIntern"
-        android:layout_width="259dp"
-        android:layout_height="195dp"
-        app:srcCompat="@android:drawable/ic_menu_gallery"
+        android:textColor="@android:color/white"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="69dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/takePhotoInter"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="48dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/takePhotoInter" />
+        android:layout_marginBottom="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/readIntern"
+        android:layout_marginLeft="69dp"
+        android:layout_marginRight="69dp" />
+
+    <ImageView
+        android:id="@+id/imageViewIntern"
+        android:layout_width="0dp"
+        android:layout_height="222dp"
+        app:srcCompat="@android:drawable/ic_menu_gallery"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSaveInter"
+        app:layout_constraintRight_toRightOf="@+id/buttonSaveInter"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="87dp"
+        app:layout_constraintLeft_toLeftOf="@+id/buttonSaveInter" />
 
     <Button
         android:id="@+id/readIntern"
         android:onClick="readFileClick"
-        android:layout_width="175dp"
+        android:layout_width="0dp"
         android:layout_height="48dp"
         android:text="Ver foto"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/buttonSaveInter"
-        android:layout_marginTop="13dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewIntern"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toRightOf="@+id/buttonSaveInter" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Digite algo..."
-        tools:layout_constraintTop_creator="1"
+        tools:layout_editor_absoluteX="204dp"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toTopOf="@+id/imageViewIntern"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="18dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:layout_marginStart="19dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@+id/buttonSaveInter"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="13dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="64dp"
-        android:layout_marginRight="64dp" />
+        android:layout_marginBottom="90dp"
+        app:layout_constraintLeft_toRightOf="@+id/takePhotoInter"
+        android:layout_marginLeft="19dp" />
 
 </android.support.constraint.ConstraintLayout>
