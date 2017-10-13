@@ -9,9 +9,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class InternStorageActivity extends AppCompatActivity {
 
@@ -28,8 +26,8 @@ public class InternStorageActivity extends AppCompatActivity {
     }
 
 
-    public void takePhotoIntern(View v){
-        Intent intent = new Intent ("android.media.action.IMAGE_CAPTURE");
+    public void takePhotoIntern(View v) {
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         startActivityForResult(intent, 0);
     }
 
@@ -37,30 +35,40 @@ public class InternStorageActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(data != null){
-            Bundle bundle = data.getExtras();
-            if(bundle != null){
 
-                FileOutputStream fos = null;
-                Bitmap bitmap = (Bitmap) bundle.get("data");
-                
-                try {
-                    //abre o arquivo chamado FILENAME para ESCRITA
-                    fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
-                    fos.close();
-                    Toast.makeText(this, "Salvo!", Toast.LENGTH_SHORT).show();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if (requestCode == 0 && resultCode == RESULT_OK) {
+            if (data != null) {
+                Bundle bundle = data.getExtras();
+                if (bundle != null) {
+
+                    FileOutputStream fos = null;
+                    Bitmap bitmap = (Bitmap) bundle.get("data");
+
+                    try {
+                        //abre o arquivo chamado FILENAME para ESCRITA
+                        fos = openFileOutput(FILENAME, Context.MODE_PRIVATE);
+
+                        Toast.makeText(this, "Salvo!", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
+                    imageView.setImageBitmap(bitmap);
+
+                    try {
+                        //metodo que garante o envio do último lote de bytes enviados para gravação
+                        fos.flush();
+                        //metodo que fecha a stram de leitura ou gravação
+                        fos.close();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos);
-                imageView.setImageBitmap(bitmap);
             }
         }
     }
-
-
 
 
 }
